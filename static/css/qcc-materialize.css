@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+}
+
+.header {
+    color: #1976D2;
+    margin-top: 80px;
+    font-weight: 300;
+}
+
+.introduction {
+    color: #ee6e73;
+    font-weight: 300;
+}
+
+footer.page-footer {
+    background-color: #1e88e5;
+}
+
+footer.footer-copyright {
+    background-color: #1565c0;
+}
+
+.card-image-size {
+    height: 200px
+}
+
+.card-title-image-filename {
+    width: 90%;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}

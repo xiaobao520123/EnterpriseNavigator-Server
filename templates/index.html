@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--载入谷歌图标和字体-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--载入css文件-->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/qcc-materialize.css')}}"  media="screen,projection"/>
+    <!--适配移动设备-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--设置网站图标-->
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/logo.png')}}" type="image/x-icon">
+  </head>
+  <body>
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/materialize.min.js')}}"></script>
+    <main>
+        <div class="container">
+            <h1 class="header center">Enterprise Navigator</h1>
+            <div class="row center">
+                <h5 class="introduction col s12 light center">Enterprise Entity Dectection based on Machine Learning Technology</h4>
+            </div>
+            <div class="row center">
+                <span style="display: none;" id="span-file-count" class="col s12 light center"></span>
+            </div>
+            <div class="row center">  
+                <a id="choose-folder" class="btn-large waves-effect waves-light blue"><i class="material-icons left">image</i>Choose or drag a folder to start...</a>
+                <a id="start-scan" style="display: none;" class="btn-large waves-effect waves-light blue"><i class="material-icons left">search</i>Start</a>
+                <div id="circle-progress" style="display: none;" class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+              
+                    <div class="spinner-layer spinner-red">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+              
+                    <div class="spinner-layer spinner-yellow">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+              
+                    <div class="spinner-layer spinner-green">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <div style="display: none;">
+            <form action="/upload" id="form-scan" method="post" enctype="multipart/form-data">
+                <input type="file" id="file_selector" name="file_selector" webkitdirectory />
+                <input type="submit" id="file_submit" name="file_submit" />
+            </form>
+        </div>
+    </main>
+
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+            © 2020 Yuanhang Studio, All rights reserved.
+            <a class="grey-text text-lighten-4 right" href="http://www.cnsoftbei.com/">China Software Cup</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+      // 递归获取目录文件树
+      function getFilesFromWebkitDataTransferItems(dataTransferItems) {
+        function traverseFileTreePromise(item, path='') {
+            return new Promise( resolve => {
+              if (item.isFile) {
+                item.file(file => {
+                  file.filepath = path + file.name 
+                  files.push(file)
+                  resolve(file)
+                })
+              } else if (item.isDirectory) {
+                let dirReader = item.createReader()
+                dirReader.readEntries(entries => {
+                  let entriesPromises = []
+                  for (let entr of entries)
+                    entriesPromises.push(traverseFileTreePromise(entr, path + item.name + "/"))
+                  resolve(Promise.all(entriesPromises))
+                })
+              }
+            })
+          }
+
+          var files = [];
+          return new Promise((resolve, reject) => {
+            let entriesPromises = []
+            for (let it of dataTransferItems)
+              entriesPromises.push(traverseFileTreePromise(it.webkitGetAsEntry()))
+            Promise.all(entriesPromises)
+              .then(entries => {
+                
+                resolve(files)
+              })
+          })
+        }
+    
+        $(document).ready(function(){
+            // 接管默认拖放响应
+            $(document).on(
+                'dragover',
+                function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            );
+            // 接管默认拖放响应
+            $(document).on(
+                'dragenter',
+                function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            );
+            // 处理拖放事件
+            $(document).on(
+                'drop',
+                function(e){
+                    if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        var count = e.originalEvent.dataTransfer.files.length
+                        if (count > 0) {
+                          var items = event.dataTransfer.items;
+                            getFilesFromWebkitDataTransferItems(items)
+                              .then(files => {
+                                const dT = new DataTransfer();
+                                files.forEach((file, index) => {
+                                  dT.items.add(file);
+                                });
+                                document.getElementById("file_selector").files = dT.files;
+                                
+                                $("#start-scan").css("display", "");
+                                $("#choose-folder").css("display", "none");
+                                $("#span-file-count").css("display", "");
+                                $("#span-file-count").text(files.length + " files/folders dectected");
+                            });
+                        }
+                    }
+                }
+            );
+            $("#file_selector").change(function(e){
+                if (e.target.files.length > 0) {
+                    $("#start-scan").css("display", "");
+                    $("#choose-folder").css("display", "none");
+                    $("#span-file-count").css("display", "");
+                    $("#span-file-count").text(e.target.files.length + " files dectected");
+                } else {
+                    $("#start-scan").css("display", "none");
+                    $("#choose-folder").css("display", "");
+                    $("#span-file-count").css("display", "none");
+                }
+            });
+            
+            $("#start-scan").click(function() {
+                $("#file_submit").click();
+                $("#file_selector").val(null);
+                $("#start-scan").css("display", "none");
+                $("#circle-progress").css("display", "");
+                $("#span-file-count").text("Dectecting...");
+            });
+
+            $("#choose-folder").click(function() {
+                $("#file_selector").click();
+            });
+        });
+    </script>
+   </body> 
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--载入谷歌图标和字体-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--载入css文件-->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/qcc-materialize.css')}}"  media="screen,projection"/>
+    <!--适配移动设备-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--设置网站图标-->
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/logo.png')}}" type="image/x-icon">
+  </head>
+  <body>
+    <script type="text/javascript" src="{{url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/materialize.min.js')}}"></script>
+    <main>
+        <div class="container">
+            <h1 class="header center">Result Showcase</h1>
+
+            <div class="row center">
+                <span id="span-file-output" class="col s12 center">Results are saved in<a class="green-text text-darken-2 light" href="{{excel_file}}">{{excel_file}}</a></span>
+            </div>            
+
+            <div class="row">
+                <div class="col left">
+                    <span id="span-file-time">Eclapsed: <span class="grey-text light text-darken-4">{{delay}}</span> second(s)</span>
+                </div>
+    
+                <div class="col right">
+                    <span id="span-file-time">Average: <span class="grey-text light text-darken-4">{{average_speed}}</span> image per second</span>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for collection in collections %}
+                    <div class="col s12 m4">
+                        <div class="card hoverable z-depth-3 small">
+                            <div class="card-image card-image-size">
+                                <img class="materialboxed" data-caption="{{collection.enterprise}}" src="{{collection.img_preview}}">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title-box-image-filename card-title-image-filename">
+                                    <span class="card-title">{{collection.filename}}</span>
+                                </div>
+                                <span class="grey-text">{{collection.enterprise}}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red hoverable waves-effect waves-light tooltipped" data-position="top" data-delay="50" data-tooltip="Back to homepage" href='/'>
+              <i class="large material-icons">home</i>
+            </a>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+            © 2020 Yuanhang Studio, All rights reserved.
+            <a class="grey-text text-lighten-4 right" href="http://www.cnsoftbei.com/">China Software Cup</a>
+            </div>
+        </div>
+    </footer>
+   </body> 
+</html>
