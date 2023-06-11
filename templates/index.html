@@ -18,7 +18,7 @@
         <div class="container">
             <h1 class="header center">Enterprise Navigator</h1>
             <div class="row center">
-                <h5 class="introduction col s12 light center">Enterprise Entity Dectection based on Machine Learning Technology</h4>
+                <h5 class="introduction col s12 light center">Enterprise Entity Detection based on Machine Learning Technology</h4>
             </div>
             <div class="row center">
                 <span style="display: none;" id="span-file-count" class="col s12 light center"></span>
@@ -163,7 +163,7 @@
                                 $("#start-scan").css("display", "");
                                 $("#choose-folder").css("display", "none");
                                 $("#span-file-count").css("display", "");
-                                $("#span-file-count").text(files.length + " files/folders dectected");
+                                $("#span-file-count").text(files.length + " files/folders detected");
                             });
                         }
                     }
@@ -174,7 +174,7 @@
                     $("#start-scan").css("display", "");
                     $("#choose-folder").css("display", "none");
                     $("#span-file-count").css("display", "");
-                    $("#span-file-count").text(e.target.files.length + " files dectected");
+                    $("#span-file-count").text(e.target.files.length + " files detected");
                 } else {
                     $("#start-scan").css("display", "none");
                     $("#choose-folder").css("display", "");
@@ -187,7 +187,7 @@
                 $("#file_selector").val(null);
                 $("#start-scan").css("display", "none");
                 $("#circle-progress").css("display", "");
-                $("#span-file-count").text("Dectecting...");
+                $("#span-file-count").text("Detecting...");
             });
 
             $("#choose-folder").click(function() {

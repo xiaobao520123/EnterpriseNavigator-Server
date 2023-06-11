@@ -40,7 +40,7 @@ def batch_upload(headers, file_data):
     
     end = timeit.default_timer()
     delay = end-start
-    print('Eclapsed： %s 秒' % delay)
+    print('Eclapsed: %s second(s)' % delay)
     return response, delay
 
 # 将批量识别的结果保存到表格文件
@@ -53,10 +53,10 @@ def write_batch_detection_result(collections):
     # 创建Excel工作本
     book = openpyxl.Workbook()
     # 创建组
-    sheet = book.create_sheet('识别结果', 0)
+    sheet = book.create_sheet('Results', 0)
 
-    sheet.cell(1, 1, '图片')
-    sheet.cell(1, 2, '商铺名称')    
+    sheet.cell(1, 1, 'Image')
+    sheet.cell(1, 2, 'Shop name')    
     # 将结果逐条写入表格中
     for i in range(len(collections)):
         sheet.cell(i + 1 + 1, 1, collections[i]['filename'])
@@ -106,7 +106,7 @@ def process_detection_result(json_data):
         
         # 识别失败
         if success == 0:
-            enterprise = '<识别失败>'
+            enterprise = '<failed>'
 
         img_filename = secure_filename(key)
         img_path = os.path.join(cfg.image_preview_folder, img_filename)

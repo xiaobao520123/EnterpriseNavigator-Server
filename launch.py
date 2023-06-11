@@ -119,7 +119,7 @@ def qcc_upload():
             delay=delay, 
             average_speed=average_speed, 
             excel_file=excel_filepath)
-    return '禁止访问！'
+    return 'Access denied!'
 
 # API——批量上传文件
 @app.route('/api/batch', methods=['POST'])
@@ -160,7 +160,7 @@ def handle_app_qcc():
             raw_data = detect_enterprise_from_upload_file(file)
             return jsonify(raw_data)
         else:
-            return generate_err_msg('file type not allowd')
+            return generate_err_msg('file type not allowed')
     return 'Access denied!'
 
 if __name__ == '__main__':

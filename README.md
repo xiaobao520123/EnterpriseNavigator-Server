@@ -7,18 +7,18 @@
 
 [简体中文](./docs/README_zh-cn.md)
 
-A shopsign dectection application based on AdvancedEAST and AttentionOCR
+A shopsign detection app based on AdvancedEAST and AttentionOCR
 
-- This was one of the projects during the "9th China Software Cup" (Second Part) competition.
-- Our team won the National First Prize in this competition.
+- This was one of the projects during the "9th China Software Cup" competition (Second Part).
+- Our team won the `National First Prize` in this competition.
 
 ## Feature
 
 - Target detection. Specifically, shopsign detection
-  - During the competiton, we used the dataset included to train our models.
+  - During the competiton, we used provided dataset to train our models.
 - Text recognition
-- Dectection evaluation
-- Results showcase
+- Detection evaluation
+- Result showcase
 - Interative web UI
 
 ## Dependency
@@ -37,7 +37,7 @@ gast==0.2.2
 
 ### Install requirements
 
-- Make sure you already have a system with Nvidia graphics that support CUDA.
+- Make sure you already have a machine with Nvidia graphics that support CUDA.
 - [Anaconda](https://www.anaconda.com/) is highly recommended.
 
 ```
@@ -46,10 +46,10 @@ pip install -r requirements.txt
 
 ### Install models
 
-- By default, if you haven't put any model inside `models` directory, it will automatically download our trained ones from [huggingface](https://huggingface.co/)
+- By default, if you haven't put any model inside `models` directory, it will automatically download our trained ones from [huggingface](https://huggingface.co/).
 - You can put your own models into `models` folder.
-  - Put AdvancedEAST models into `models/AdvancedEAST`
-  - Put AttentionOCR models into `models/AttentionOCR`
+  - Put AdvancedEAST models into `models/AdvancedEAST`.
+  - Put AttentionOCR models into `models/AttentionOCR`.
 
 ### Launch
 
@@ -67,7 +67,7 @@ http://localhost:6660
 
 MIT License
 
-### References
+### Reference
 
 [China Software Cup](http://www.cnsoftbei.com/)
 
