@@ -1,4 +1,4 @@
-# Enterprise Navigator
+# 企航 - 企业实体识别系统
 
 ![Homepage](../imgs/homepage.jpg)
 ![Showcase](../imgs/result_showcase.jpg)
