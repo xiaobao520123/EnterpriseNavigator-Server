@@ -57,7 +57,7 @@ pip install -r requirements.txt
 python launch.py
 ```
 
-- Then you can visit the app using a web browser like `Google Chrome`.
+- Then you can visit the app using the URL below with a web browser like `Google Chrome`.
 
 ```
 http://localhost:6660
