@@ -19,7 +19,7 @@ A shopsign detection app based on AdvancedEAST and AttentionOCR
 - Text recognition
 - Detection evaluation
 - Result showcase
-- Interative web UI
+- Interactive web UI
 
 ## Dependency
 
@@ -46,7 +46,7 @@ pip install -r requirements.txt
 
 ### Install models
 
-- By default, if you haven't put any model inside `models` directory, it will automatically download our trained ones from [huggingface](https://huggingface.co/).
+- By default, if you don't have models installed inside `models` folder, it will automatically download our trained models from [huggingface](https://huggingface.co/).
 - You can put your own models into `models` folder.
   - Put AdvancedEAST models into `models/AdvancedEAST`.
   - Put AttentionOCR models into `models/AttentionOCR`.
