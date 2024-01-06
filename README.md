@@ -15,15 +15,15 @@ A shopsign detection app based on AdvancedEAST and AttentionOCR
 ## Feature
 
 - Target detection. Specifically, shopsign detection
-  - During the competiton, we used provided dataset to train our models.
+- During the competition, we used provided dataset to train our models.
 - Text recognition
 - Detection evaluation
 - Result showcase
-- Interative web UI
+- Interactive web UI
 
 ## Dependency
 
-```
+```text
 python>=3.7
 tensorflow==1.14.0
 tensorflow-gpu==1.14.0
@@ -40,7 +40,7 @@ gast==0.2.2
 - Make sure you already have a machine with Nvidia graphics that support CUDA.
 - [Anaconda](https://www.anaconda.com/) is highly recommended.
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
@@ -53,13 +53,13 @@ pip install -r requirements.txt
 
 ### Launch
 
-```
+```bash
 python launch.py
 ```
 
 - Then you can visit the app using a web browser like `Google Chrome`.
 
-```
+```url
 http://localhost:6660
 ```
 
